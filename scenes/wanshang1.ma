@@ -1,6 +1,6 @@
 //Maya ASCII 2016 scene
 //Name: wanshang1.ma
-//Last modified: Fri, Aug 24, 2018 10:13:42 PM
+//Last modified: Fri, Aug 24, 2018 10:40:00 PM
 //Codeset: 936
 requires maya "2016";
 currentUnit -l centimeter -a degree -t film;
@@ -12,13 +12,13 @@ fileInfo "osv" "Microsoft Windows 7 Ultimate Edition, 64-bit Windows 7 Service P
 createNode transform -s -n "persp";
 	rename -uid "3AA284D6-4A24-81C1-C71C-00B056C34527";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -7.4996449743529361 4.8035022413453587 4.6787019380245312 ;
-	setAttr ".r" -type "double3" -35.138352729528044 295.79999999999717 -7.3077376273219114e-015 ;
+	setAttr ".t" -type "double3" -16.338383673607069 7.6489707751389933 -13.582953014102879 ;
+	setAttr ".r" -type "double3" -22.538352729526036 229.39999999998909 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "E0381830-4A37-5E37-266E-C08EBD2BF87A";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 9.6122854353216258;
+	setAttr ".coi" 20.761399910559838;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -84,19 +84,16 @@ createNode mesh -n "pCubeShape1" -p "pCube1";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-	setAttr -s 4 ".pt[8:11]" -type "float3"  0.43512097 0.59963745 -0.7491734 
-		-0.43512097 0.59963745 -0.7491734 -0.36430126 -0.59964514 0.7491734 0.43512097 0.59963745 
-		0.12106898;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "C49F8033-4C70-38A9-336D-CBA18E0300AA";
+	rename -uid "D8C262D1-45B0-AE7C-D21F-1FA306750905";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "0A0B9E51-4520-5469-B65C-5AB8D0F6350E";
+	rename -uid "6B8B2067-4B2F-CEE5-CE49-1A93096CDAEA";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "2E72017D-4875-683E-7CB1-A0A36A13E2A3";
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "75EE5F07-43E6-31B0-B06E-5CB5ECC35DF7";
+	rename -uid "F2E399D5-4802-141A-1776-EF84B5DE8000";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "C275B218-468D-5C83-7CE0-C0AD928CA3C7";
 	setAttr ".g" yes;
@@ -186,9 +183,26 @@ createNode polyExtrudeFace -n "polyExtrudeFace1";
 createNode polyTweak -n "polyTweak1";
 	rename -uid "181CF257-4E9E-E0DC-D838-E98F22611817";
 	setAttr ".uopa" yes;
-	setAttr -s 3 ".tk";
+	setAttr -s 2 ".tk";
 	setAttr ".tk[0]" -type "float3" -1.1523955 -1.2520887 0.9989832 ;
 	setAttr ".tk[5]" -type "float3" -0.081379339 1.3781075 -0.72175789 ;
+createNode polyExtrudeFace -n "polyExtrudeFace2";
+	rename -uid "4D9534FD-47B3-0565-6AED-0586A92D561A";
+	setAttr ".ics" -type "componentList" 1 "f[8]";
+	setAttr ".ix" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 -0.48720075783942141 -0.58860788661049246 0 1;
+	setAttr ".ws" yes;
+	setAttr ".pvt" -type "float3" -0.54837149 0.75669777 -0.56230295 ;
+	setAttr ".rs" 64887;
+	setAttr ".lt" -type "double3" 7.7715611723760958e-016 -1.6653345369377348e-016 1.8554820812320552 ;
+	setAttr ".c[0]"  0 1 1;
+	setAttr ".cbn" -type "double3" -1.0281628578684132 -0.088607886610492459 -1.2217578887939453 ;
+	setAttr ".cbx" -type "double3" -0.068580111839512958 1.6020034758467829 0.097152017056941986 ;
+createNode polyTweak -n "polyTweak2";
+	rename -uid "95DA973F-47AC-9B68-9DAB-BA93DE6F58B5";
+	setAttr ".uopa" yes;
+	setAttr -s 4 ".tk[8:11]" -type "float3"  0.43512097 0.59963745 -0.7491734
+		 -0.43512097 0.59963745 -0.7491734 -0.36430126 -0.59964514 0.7491734 0.43512097 0.59963745
+		 0.12106898;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -215,7 +229,7 @@ select -ne :defaultResolution;
 select -ne :hardwareRenderGlobals;
 	setAttr ".ctrs" 256;
 	setAttr ".btrs" 512;
-connectAttr "polyExtrudeFace1.out" "pCubeShape1.i";
+connectAttr "polyExtrudeFace2.out" "pCubeShape1.i";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
@@ -225,6 +239,9 @@ connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "polyTweak1.out" "polyExtrudeFace1.ip";
 connectAttr "pCubeShape1.wm" "polyExtrudeFace1.mp";
 connectAttr "polyCube1.out" "polyTweak1.ip";
+connectAttr "polyTweak2.out" "polyExtrudeFace2.ip";
+connectAttr "pCubeShape1.wm" "polyExtrudeFace2.mp";
+connectAttr "polyExtrudeFace1.out" "polyTweak2.ip";
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr "pCubeShape1.iog" ":initialShadingGroup.dsm" -na;
 // End of wanshang1.ma
